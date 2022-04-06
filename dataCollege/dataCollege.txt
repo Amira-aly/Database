@@ -1,0 +1,95 @@
+CREATE DATABASE college;
+
+CREATE TABLE users(
+    id bigint(20) PRIMARY KEY ,
+    name varchar(255) ,
+    email varchar(255) NOT NULL ,
+    role int (11),
+    email_varified_at timestamp ,
+    passwordd varchar(255),
+    remember_token varchar(255),
+    theem int(11),
+    UNIQUE(email)
+);
+
+CREATE TABLE news(
+    id int(11) PRIMARY KEY ,
+    news text ,
+    image text , 
+    pdf text ,
+    created_at timestamp
+);
+
+CREATE TABLE students(
+    id int(11) PRIMARY KEY ,
+    name_ar text ,
+    name_eg varchar(100),
+    social_id bigint(20),
+    gender varchar(10),
+    image text,
+    shoaba varchar(10),
+    schoolType varchar(15),
+    schoolName text ,
+    studentPhone varchar(11),
+    address text ,
+    region varchar(100),
+    mail varchar(150),
+    fatherPhone varchar(11),
+    firstLanguage varchar(10),
+    total float,
+    eng1 float ,
+    finalTotal float ,
+    reg_date datetime,
+    passwordd varchar(30),
+    created_at timestamp
+);
+
+CREATE TABLE questions(
+    id int(11) PRIMARY KEY ,
+    question varchar(250),
+    answer text ,
+    student_id int(11),
+    public int(11),
+    created_at timestamp,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE programs(
+    id int(11) PRIMARY KEY ,
+    program text
+);
+
+CREATE TABLE student_requirements(
+    id int(11) PRIMARY KEY ,
+    student_id int(11),
+    raghba_1 int(11),
+    raghba_2 int(11),
+    raghba_3 int(11),
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (raghba_1) REFERENCES programs(id),
+    FOREIGN KEY (raghba_2) REFERENCES programs(id),
+    FOREIGN KEY (raghba_3) REFERENCES programs(id)
+);
+
+CREATE TABLE pre_decision(
+    id int(11) PRIMARY KEY ,
+    student_id int(11),
+    created_at timestamp,
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE final_decision(
+    id int(11) PRIMARY KEY ,
+    pre_decision_id int(11),
+    proram_id int(11),
+    notes varchar(100),
+    created_at timestamp,
+    FOREIGN KEY (pre_decision_id) REFERENCES pre_decision(id),
+    FOREIGN KEY (proram_id) REFERENCES programs(id)
+);
+
+CREATE TABLE theem(
+    id int(11) PRIMARY KEY,
+    them int(1),
+    created_at timestamp 
+);

@@ -1,0 +1,49 @@
+CREATE DATABASE shop;
+
+CREATE TABLE customer (
+    id int PRIMARY KEY ,
+    fullName varchar(55),
+    address varchar(55),
+    phone varchar(14),
+    age int ,
+    Gender Varchar (10) ,
+    passwordd varchar(20)
+);
+    
+CREATE TABLE products(
+    id int PRIMARY KEY ,
+    name varchar(20),
+    category varchar(55),
+    price int 
+);
+
+CREATE TABLE orders(
+    id int PRIMARY KEY ,
+    customerId int ,
+    productId int ,
+    data_at date ,
+    amount int ,
+    FOREIGN KEY (customerId) REFERENCES customer(id),
+    FOREIGN KEY (productId) REFERENCES products(id)
+);
+
+CREATE TABLE department (
+    id int PRIMARY KEY ,
+    name varchar(20)
+);
+
+CREATE TABLE employees(
+    id int PRIMARY KEY ,
+    name varchar(20),
+    salary int ,
+    departmentId int,
+    FOREIGN KEY (departmentId) REFERENCES department(id)
+);
+
+CREATE TABLE admins(
+    id int PRIMARY KEY,
+    email varchar(30),
+    passwordd varchar(20),
+    employeeId int ,
+    FOREIGN KEY (employeeId) REFERENCES employees(id)
+);
